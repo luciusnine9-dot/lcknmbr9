@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LCKNMBR9</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
-    font-family: 'Courier New', monospace;
+    font-family: 'Orbitron', sans-serif;
     background: #000;
     color: #fff;
     overflow: hidden;
@@ -16,101 +17,107 @@
     justify-content: center;
     height: 100vh;
   }
+  .triangle {
+    position: relative;
+    width: 70vmin;
+    height: 60vmin;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .glitch {
-    font-size: 5rem;
-    font-weight: bold;
+    font-size: 6vw;
+    font-weight: 700;
     position: relative;
     color: #fff;
-    animation: glitch 1s infinite;
+    animation: glitch-animation 2s infinite;
   }
-  .glitch::before,
-  .glitch::after {
+  .glitch:before,
+  .glitch:after {
     content: "LCKNMBR9";
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
+    height: 100%;
     overflow: hidden;
-    clip: rect(0, 900px, 0, 0);
+    background: transparent;
   }
-  .glitch::before {
+  .glitch:before {
     left: 2px;
     text-shadow: -2px 0 cyan;
-    animation: glitch 2s infinite linear alternate-reverse;
+    animation: glitch-animation 3s infinite alternate-reverse;
   }
-  .glitch::after {
+  .glitch:after {
     left: -2px;
     text-shadow: -2px 0 magenta;
-    animation: glitch 3s infinite linear alternate-reverse;
+    animation: glitch-animation 1.5s infinite alternate;
   }
-  @keyframes glitch {
-    0% {
-      clip: rect(42px, 9999px, 44px, 0);
-    }
-    5% {
-      clip: rect(12px, 9999px, 56px, 0);
-    }
-    10% {
-      clip: rect(62px, 9999px, 4px, 0);
-    }
-    15% {
-      clip: rect(72px, 9999px, 32px, 0);
-    }
-    20% {
-      clip: rect(32px, 9999px, 62px, 0);
-    }
-    25% {
-      clip: rect(12px, 9999px, 88px, 0);
-    }
-    30% {
-      clip: rect(22px, 9999px, 12px, 0);
-    }
-    35% {
-      clip: rect(92px, 9999px, 42px, 0);
-    }
-    40% {
-      clip: rect(72px, 9999px, 24px, 0);
-    }
-    45% {
-      clip: rect(12px, 9999px, 56px, 0);
-    }
-    50% {
-      clip: rect(62px, 9999px, 12px, 0);
-    }
-    55% {
-      clip: rect(32px, 9999px, 62px, 0);
-    }
-    60% {
-      clip: rect(12px, 9999px, 88px, 0);
-    }
-    65% {
-      clip: rect(42px, 9999px, 12px, 0);
-    }
-    70% {
-      clip: rect(22px, 9999px, 52px, 0);
-    }
-    75% {
-      clip: rect(32px, 9999px, 12px, 0);
-    }
-    80% {
-      clip: rect(62px, 9999px, 92px, 0);
-    }
-    85% {
-      clip: rect(72px, 9999px, 32px, 0);
-    }
-    90% {
-      clip: rect(12px, 9999px, 56px, 0);
-    }
-    95% {
-      clip: rect(42px, 9999px, 22px, 0);
-    }
-    100% {
-      clip: rect(72px, 9999px, 42px, 0);
-    }
+  @keyframes glitch-animation {
+    0% { clip-path: inset(0% 0 90% 0); }
+    20% { clip-path: inset(10% 0 70% 0); }
+    40% { clip-path: inset(50% 0 20% 0); }
+    60% { clip-path: inset(80% 0 5% 0); }
+    80% { clip-path: inset(30% 0 60% 0); }
+    100% { clip-path: inset(0% 0 90% 0); }
+  }
+  .clown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+  }
+  .clown-overlay.active {
+    display: flex;
+  }
+  .clown {
+    font-size: 30vmin;
+    filter: grayscale(100%);
+    animation: clown-glitch 2s infinite;
+  }
+  @keyframes clown-glitch {
+    0% { transform: translate(0,0); }
+    20% { transform: translate(-5px,3px); }
+    40% { transform: translate(5px,-5px); }
+    60% { transform: translate(-3px,5px); }
+    80% { transform: translate(4px,-3px); }
+    100% { transform: translate(0,0); }
   }
 </style>
 </head>
 <body>
-<div class="glitch">LCKNMBR9</div>
+  <div class="triangle">
+    <div class="glitch">LCKNMBR9</div>
+  </div>
+  <div class="clown-overlay" id="clownOverlay">
+    <div class="clown">🤡</div>
+  </div>
+<script>
+  function showClown() {
+    const overlay = document.getElementById('clownOverlay');
+    overlay.classList.add('active');
+    setTimeout(() => {
+      overlay.classList.remove('active');
+    }, 3000);
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === '9') {
+      showClown();
+    }
+  });
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.textContent && e.target.textContent.includes('9')) {
+      showClown();
+    }
+  });
+</script>
 </body>
 </html>
