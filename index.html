@@ -1,4 +1,4 @@
-<!-- updated design: triangle visible frame, glitch always visible, clown overlay -->
+<!-- updated design: triangle background with text overlay, glitch visible, cursor pointer, clown overlay -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,20 +18,28 @@ body {
   justify-content: center;
   align-items: center;
 }
-.triangle {
+.container {
   position: relative;
   width: 80vmin;
   height: 70vmin;
+}
+.triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   border: 2px solid #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .glitch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 8vmin;
-  position: relative;
   color: #fff;
+  cursor: pointer;
 }
 .glitch::before,
 .glitch::after {
@@ -83,25 +91,22 @@ body {
 </style>
 </head>
 <body>
-<div class="triangle">
+<div class="container">
+  <div class="triangle"></div>
   <div class="glitch" data-text="LCKNMBR9">LCKNMBR9</div>
 </div>
 <div id="clownOverlay">🤡</div>
 <script>
 function showClown() {
-  var overlay = document.getElementById('clownOverlay');
+  const overlay = document.getElementById('clownOverlay');
   overlay.style.display = 'flex';
-  setTimeout(function(){ overlay.style.display = 'none'; }, 3000);
+  setTimeout(() => { overlay.style.display = 'none'; }, 3000);
 }
-document.addEventListener('keydown', function(e) {
-  if (e.key === '9') {
-    showClown();
-  }
+document.addEventListener('keydown', (e) => {
+  if (e.key === '9') showClown();
 });
-document.querySelector('.glitch').addEventListener('click', function(e) {
-  if (e.target.innerText.includes('9')) {
-    showClown();
-  }
+document.querySelector('.glitch').addEventListener('click', () => {
+  showClown();
 });
 </script>
 </body>
