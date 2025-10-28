@@ -1,4 +1,4 @@
-<!-- updated design: triangle background with text overlay, glitch visible, cursor pointer, clown overlay -->
+<!-- updated design: triangle background, monochrome glitch, pointer cursor, clown overlay shakes -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,11 +17,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .container {
   position: relative;
   width: 80vmin;
   height: 70vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .triangle {
   position: absolute;
@@ -33,13 +37,10 @@ body {
   border: 2px solid #fff;
 }
 .glitch {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 8vmin;
-  color: #fff;
+  position: relative;
   cursor: pointer;
+  color: #fff;
 }
 .glitch::before,
 .glitch::after {
@@ -47,32 +48,29 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  color: rgba(255,255,255,0.6);
 }
 .glitch::before {
-  color: rgba(0,255,255,0.6);
   animation: glitchTop 2s infinite;
   clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
 }
 .glitch::after {
-  color: rgba(255,0,255,0.6);
   animation: glitchBottom 2s infinite;
   clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
 }
 @keyframes glitchTop {
-  0% { transform: translate(0,0); }
+  0%,100% { transform: translate(0,0); }
   20% { transform: translate(2px,-2px); }
   40% { transform: translate(-2px,2px); }
   60% { transform: translate(1px,-1px); }
   80% { transform: translate(-1px,1px); }
-  100% { transform: translate(0,0); }
 }
 @keyframes glitchBottom {
-  0% { transform: translate(0,0); }
+  0%,100% { transform: translate(0,0); }
   20% { transform: translate(-2px,2px); }
   40% { transform: translate(2px,-2px); }
   60% { transform: translate(-1px,1px); }
   80% { transform: translate(1px,-1px); }
-  100% { transform: translate(0,0); }
 }
 #clownOverlay {
   display: none;
@@ -87,6 +85,14 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 100;
+  animation: shake 0.3s infinite;
+}
+@keyframes shake {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(2px,-2px); }
+  50% { transform: translate(-2px,2px); }
+  75% { transform: translate(2px,2px); }
+  100% { transform: translate(0,0); }
 }
 </style>
 </head>
@@ -100,13 +106,15 @@ body {
 function showClown() {
   const overlay = document.getElementById('clownOverlay');
   overlay.style.display = 'flex';
-  setTimeout(() => { overlay.style.display = 'none'; }, 3000);
+  setTimeout(() => {
+    overlay.style.display = 'none';
+  }, 3000);
 }
 document.addEventListener('keydown', (e) => {
   if (e.key === '9') showClown();
 });
-document.querySelector('.glitch').addEventListener('click', () => {
-  showClown();
+document.querySelector('.glitch').addEventListener('click', (e) => {
+  if (e.target.innerText.includes('9')) showClown();
 });
 </script>
 </body>
