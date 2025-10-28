@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LCKNMBR9</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .glitch {
+    font-size: 5rem;
+    font-weight: bold;
+    position: relative;
+    color: #fff;
+    animation: glitch 1s infinite;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: "LCKNMBR9";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+  }
+  .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 cyan;
+    animation: glitch 2s infinite linear alternate-reverse;
+  }
+  .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 magenta;
+    animation: glitch 3s infinite linear alternate-reverse;
+  }
+  @keyframes glitch {
+    0% {
+      clip: rect(42px, 9999px, 44px, 0);
+    }
+    5% {
+      clip: rect(12px, 9999px, 56px, 0);
+    }
+    10% {
+      clip: rect(62px, 9999px, 4px, 0);
+    }
+    15% {
+      clip: rect(72px, 9999px, 32px, 0);
+    }
+    20% {
+      clip: rect(32px, 9999px, 62px, 0);
+    }
+    25% {
+      clip: rect(12px, 9999px, 88px, 0);
+    }
+    30% {
+      clip: rect(22px, 9999px, 12px, 0);
+    }
+    35% {
+      clip: rect(92px, 9999px, 42px, 0);
+    }
+    40% {
+      clip: rect(72px, 9999px, 24px, 0);
+    }
+    45% {
+      clip: rect(12px, 9999px, 56px, 0);
+    }
+    50% {
+      clip: rect(62px, 9999px, 12px, 0);
+    }
+    55% {
+      clip: rect(32px, 9999px, 62px, 0);
+    }
+    60% {
+      clip: rect(12px, 9999px, 88px, 0);
+    }
+    65% {
+      clip: rect(42px, 9999px, 12px, 0);
+    }
+    70% {
+      clip: rect(22px, 9999px, 52px, 0);
+    }
+    75% {
+      clip: rect(32px, 9999px, 12px, 0);
+    }
+    80% {
+      clip: rect(62px, 9999px, 92px, 0);
+    }
+    85% {
+      clip: rect(72px, 9999px, 32px, 0);
+    }
+    90% {
+      clip: rect(12px, 9999px, 56px, 0);
+    }
+    95% {
+      clip: rect(42px, 9999px, 22px, 0);
+    }
+    100% {
+      clip: rect(72px, 9999px, 42px, 0);
+    }
+  }
+</style>
+</head>
+<body>
+<div class="glitch">LCKNMBR9</div>
+</body>
+</html>
